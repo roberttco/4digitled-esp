@@ -1,0 +1,20 @@
+{
+    "files.associations": {
+        "system_error": "cpp",
+        "*.tcc": "cpp",
+        "deque": "cpp",
+        "list": "cpp",
+        "string": "cpp",
+        "unordered_map": "cpp",
+        "vector": "cpp",
+        "functional": "cpp",
+        "memory_resource": "cpp",
+        "algorithm": "cpp",
+        "random": "cpp",
+        "memory": "cpp",
+        "numeric": "cpp",
+        "cmath": "cpp",
+        "tuple": "cpp",
+        "utility": "cpp"
+    }
+}
