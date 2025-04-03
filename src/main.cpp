@@ -4,7 +4,11 @@
 #include <EspMQTTClient.h>
 #include <ezTime.h>
 
+#if __has_include("myconfig.h")
+# include "myconfig.h"
+#else
 #include "config.h"
+#endif
 
 TM1652 module(D4);
 TM16xxDisplay disp(&module, 4);
@@ -123,7 +127,7 @@ void setup()
 
     client.enableDebuggingMessages();                                                 // Enable debugging messages sent to serial output
     client.enableHTTPWebUpdater();                                                    // Enable the web updater. User and password default to values of MQTTUsername and MQTTPassword. These can be overrited with enableHTTPWebUpdater("user", "password").
-    client.enableLastWillMessage("7133egyptian/out/display2/state", "Offline", true); // You can activate the retain flag by setting the third parameter to true
+    client.enableLastWillMessage(TOPIC_STATUS, "offline", true); // You can activate the retain flag by setting the third parameter to true
     client.setWifiReconnectionAttemptDelay(15000);                                    // Set the delay between reconnection attempts to 1 second
     client.enableDrasticResetOnConnectionFailures();                                  // If the connection fails 10 times in a row, reset the ESP8266/ESP32
     client.enableMQTTPersistence();                                                   // Tell the broker to establish a persistent connection. Disabled by default. Must be called before the first loop() execution

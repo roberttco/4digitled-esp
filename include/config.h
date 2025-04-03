@@ -1,3 +1,10 @@
+// This file contains the configuration settings for the ESP32 device.  If you also
+// have a myconfig.h file, it will be included instead of this file.  This allows you to have a
+// separate configuration file for your own settings.  If you don't have a myconfig.h file, this file will be used.
+// The myconfig.h file is not included in the repository, so you can create your own version of it.
+// The myconfig.h file should be in the same directory as this file.  If you don't have a myconfig.h file, you can create one by copying this file and renaming it to myconfig.h.
+// The myconfig.h file should contain your own settings, such as the WiFi SSID and password, MQTT broker address, etc.
+
 // MQTT Topics
 // Topic to which the status is published
 #define TOPIC_STATUS "<your state topic path>"
@@ -30,7 +37,7 @@
 #define NTP_UPDATE_INTERVAL 3600 // NTP update interval in seconds (default is 3600 seconds)
 
 // Debugging stuff
-#define OPT_DEBUG_PRINT
+// #define OPT_DEBUG_PRINT
 
 #if defined(OPT_DEBUG_PRINT)
 #define DEBUG_BEGIN(x) Serial.begin(x)
@@ -44,3 +51,4 @@
 #define DEBUG_PRINTLNHEX(x)
 #endif
 
+#endif
