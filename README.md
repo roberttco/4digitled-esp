@@ -14,7 +14,7 @@ Other displays based on the TM1652 driver would not require code change.  Other 
 A WeMos D1 mini clone is the controller for this project.  Only a single data pin is required and the display is powered form the +5v connection.  The display will operate on 3.3 volts but that limits the display brightness.  The data is one direction and therefore level shifting is not a concern for the 3.3v ESP8266.
 
 ## Power
-The display is powered form the US?B connection on the D1 Mini.  While it will operation properly, the display does use a significant amount of power (about 950mA at full brightness with all segments on).  It is, therefore not recommended to use a battery for power for long periods of time.
+The display is powered form the US?B connection on the D1 Mini.  While it will operation properly, the display does use a significant amount of power (about 180mA at full brightness with all segments on, 80mA in clock mode w/lowest brightness).  It is, therefore not recommended to use a battery for power for long periods of time.
 
 # Configuration
 The code include a configuration file in the include folder named `config.h`. You can use this file however it will be committed to github (if you fork this repository) and will contain sensitive information.  It is, therefore, suggested

@@ -75,7 +75,10 @@ void onConnectionEstablished()
             showClock = false;
 
             disp.clear();
-            disp.setDisplayToDecNumber(last_state, 0, false);
+            if (last_state != 9999)
+            {
+                disp.setDisplayToDecNumber(last_state, 0, false);
+            }
         } });
 
     client.subscribe(TOPIC_STATE, [](const String &payload)
@@ -149,11 +152,7 @@ void loop()
     // myTZ event loop
     events(); // Call the events() function to check for any scheduled events
 
-    if (!client.isWifiConnected())
-    {
-        delay(100);
-    }
-    else
+    if (client.isWifiConnected())
     {
         disp.setIntensity(last_intensity); // set the display intensity
 
@@ -166,6 +165,7 @@ void loop()
         if (!wifiinfishown)
         {
             wifiinfishown = true;
+            disp.clear();
             DEBUG_PRINTLN("Connected to WiFi");
             disp.setDisplayToDecNumber(WiFi.localIP()[0], 0, false);
             delay(500);
@@ -175,7 +175,6 @@ void loop()
             delay(750);
             disp.setDisplayToDecNumber(WiFi.localIP()[3], 0, false);
             delay(750);
-            disp.clear();
         }
         else if (!client.isMqttConnected())
         {
@@ -184,24 +183,28 @@ void loop()
         }
         else if (!timeSynched || (timeStatus() == timeNeedsSync))
         {
+            disp.clear();
             disp.setDisplayToString("time"); // show con3 while waiting to connect to NTP server
             timeSynched = waitForSync(15);
-            disp.clear();
         }
         else if (!stateReceived && !showClock)
         {
             if (heartbeat)
             {
                 module.setSegments(0b10000000, 0);
+                module.setSegments(0b00000000, 1);
                 module.setSegments(0b00000000, 2);
+                module.setSegments(0b00000000, 3);
             }
             else
             {
-                module.setSegments(0b10000000, 2);
                 module.setSegments(0b00000000, 0);
+                module.setSegments(0b00000000, 1);
+                module.setSegments(0b10000000, 2);
+                module.setSegments(0b00000000, 3);
             }
         }
-    }
 
-    delay(1);
+        delay(100);
+    }
 }
